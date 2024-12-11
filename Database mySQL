@@ -1,0 +1,39 @@
+CREATE TABLE Alba (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    month VARCHAR(20),
+    capital_one FLOAT,
+    sally FLOAT,
+    truist FLOAT,
+    truist_2 FLOAT,
+    synchrony_gato FLOAT,
+    macys FLOAT,
+    navy_federal FLOAT,
+    personal_cards FLOAT,
+    loan_by_alex FLOAT,
+    grand_total FLOAT
+);
+
+CREATE TABLE Giovanni (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    month VARCHAR(20),
+    volaris FLOAT,
+    navy_federal FLOAT,
+    monthly_total FLOAT
+);
+
+CREATE TABLE Alex (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    navy_federal FLOAT,
+    capital_one_apr FLOAT,
+    month VARCHAR(20),
+    estimated_payment FLOAT,
+    payed_navy_federal FLOAT,
+    payed_capital_one FLOAT
+);
+
+CREATE TABLE Home_Loan (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    loan_amount FLOAT,
+    monthly_payment FLOAT
+);
+
