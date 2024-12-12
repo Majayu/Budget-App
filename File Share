@@ -1,12 +1,16 @@
 ##SAMBA File share##
   sudo apt install samba
+
 ##Check the status##
   systemctl status smbd 
+
 ##create a directory for the share file##
   mkdir /home/<username"alex">/sambashare
+
 #Orginal config file
   cd /etc/samba
   ls
+
 ##Modify the file to allow calles from windows computer.
   sudo nano smb.conf
 
