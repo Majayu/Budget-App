@@ -3,14 +3,16 @@
 ##Check the status##
   systemctl status smbd 
 ##create a directory for the share file##
-mkdir /home/<username>/sambashare
+  mkdir /home/<username"alex">/sambashare
 #Orginal config file
   cd /etc/samba
   ls
-##Modify the file to allow calles from windows computer
+##Modify the file to allow calles from windows computer.
   sudo nano smb.conf
+
+##Add at the bottom of  the file
 [samabashare]
   comment = Samaba on Ubuntu
-  path = /home/username/sambashare
+  path = /home/<username"alex">/sambashare
   read only = no
   browsable = yes 
