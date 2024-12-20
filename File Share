@@ -11,7 +11,7 @@
   cd /etc/samba
   ls
 
-##Modify the file to allow calles from windows computer.
+##Modify the file to allow calls from windows computer.
   sudo nano smb.conf
 
 ##Add at the bottom of  the file
