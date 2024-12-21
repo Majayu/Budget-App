@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Budget Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Family Budget Tracker</h1>
+        <nav>
+            <ul>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#input">Add Budget</a></li>
+                <li><a href="#goals">Goals</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="dashboard">
+            <h2>Dashboard</h2>
+            <div class="chart-container">
+                <canvas id="pieChart"></canvas>
+                <canvas id="barChart"></canvas>
+            </div>
+        </section>
+        
+        <section id="input">
+            <h2>Add or Update Budget</h2>
+            <form id="budgetForm">
+                <label for="person">Person:</label>
+                <select id="person" name="person">
+                    <option value="Giovanni">Giovanni</option>
+                    <option value="Alba">Alba</option>
+                    <option value="Alex">Alex</option>
+                    <option value="Home Loan">Home Loan</option>
+                </select>
+                
+                <label for="category">Category:</label>
+                <input type="text" id="category" name="category" required>
+                
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" name="amount" required>
+                
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+                
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+        
+        <section id="goals">
+            <h2>Set Financial Goals</h2>
+            <form id="goalForm">
+                <label for="goalPerson">Person:</label>
+                <select id="goalPerson" name="goalPerson">
+                    <option value="Giovanni">Giovanni</option>
+                    <option value="Alba">Alba</option>
+                    <option value="Alex">Alex</option>
+                    <option value="Home Loan">Home Loan</option>
+                </select>
+                
+                <label for="goalCategory">Category:</label>
+                <input type="text" id="goalCategory" name="goalCategory" required>
+                
+                <label for="goalAmount">Goal Amount:</label>
+                <input type="number" id="goalAmount" name="goalAmount" required>
+                
+                <button type="submit">Set Goal</button>
+            </form>
+        </section>
+    </main>
+    
+    <footer>
+        <p>© 2024 Family Budget Tracker</p>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>
