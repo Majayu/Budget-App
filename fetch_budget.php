@@ -1,9 +1,9 @@
 <?php
 // Database connection details
 $servername = "localhost";
-$username = "admin"; // Your username
-$password = "P@ssw0rd"; // Your password
-$dbname = "family_budget"; // Your database name
+$username = "admin";
+$password = "P@ssw0rd";
+$dbname = "family_budget";
 
 // Connect to the database
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -13,56 +13,61 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Prepare an array to hold data
-$data = [];
+// Prepare arrays to hold data for each table
+$data = [
+    "Home_Loan" => [],
+    "Alba" => [],
+    "Giovanni" => [],
+    "Alex" => []
+];
 
-// Fetch data for Giovanni
-$query = "SELECT id, month, volaris, navy_federal, monthly_total FROM Giovanni";
+// Fetch data for Home Loan
+$query = "SELECT id, Loan_Amount, Monthly_Payment FROM Home_Loan";
 $result = $conn->query($query);
-if ($result->num_rows > 0) {
+if ($result && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $row['person'] = "Giovanni";
-        $data[] = $row;
+        $data["Home_Loan"][] = $row; // Store Home_Loan data
     }
 }
 
 // Fetch data for Alba
-$query = "SELECT id, month, capital_one, sally, truist, grand_total FROM Alba";
+$query = "SELECT id, Month, Capital_One, Sally_Fashion, Truist, Grand_Total FROM Alba";
 $result = $conn->query($query);
-if ($result->num_rows > 0) {
+if ($result && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $row['person'] = "Alba";
-        $data[] = $row;
+        $data["Alba"][] = $row; // Store Alba data
+    }
+}
+
+// Fetch data for Giovanni
+$query = "SELECT id, Month, Volaris, Navy_Federal, Monthly_Total FROM Giovanni";
+$result = $conn->query($query);
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $data["Giovanni"][] = $row; // Store Giovanni data
     }
 }
 
 // Fetch data for Alex
-$query = "SELECT id, month, navy_federal, capital_one_apr, estimated_payment FROM Alex";
+$query = "SELECT id, Month, Navy_Federal, Capital_One_APR, Estimated_Payment FROM Alex";
 $result = $conn->query($query);
-if ($result->num_rows > 0) {
+if ($result && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $row['person'] = "Alex";
-        $data[] = $row;
+        $data["Alex"][] = $row; // Store Alex data
     }
 }
 
-// Fetch data for Home Loan
-$query = "SELECT id, loan_amount, monthly_payment FROM Home_Loan";
-$result = $conn->query($query);
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $row['person'] = "Home Loan";
-        $data[] = $row;
-    }
-}
+// Debugging: Focus on Home_Loan first
+echo '<h2>Home Loan Debugging Output</h2>';
+echo '<pre>';
+print_r($data["Home_Loan"]);
+echo '</pre>';
+die();
 
 // Close the connection
 $conn->close();
 
-// Return data as JSON
+// Return data as JSON for all tables
 header('Content-Type: application/json');
 echo json_encode($data);
 ?>
-
-//Give permissions
-sudo chmod 644 fetch_budget.php
