@@ -1,0 +1,79 @@
+Steps to Import Excel Data into MySQL
+1. Convert Excel to CSV
+
+MySQL works best with CSV files for data imports.
+
+    Open your Excel file and save it as a CSV file:
+        In Excel: File > Save As > CSV (Comma delimited).
+        Save the file on your Ubuntu machine, e.g., /home/username/data.csv.
+
+2. Prepare Your MySQL Table
+
+Ensure the MySQL table structure matches the columns in your CSV file. If necessary, create the table.
+
+Example SQL for the Alba table:
+
+CREATE TABLE Alba (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    Month VARCHAR(20),
+    Capital_One FLOAT,
+    Sally_Fashion FLOAT,
+    Truist FLOAT,
+    Synchrony_Gato FLOAT,
+    Macys FLOAT,
+    Navy_Federal FLOAT,
+    Personal_Cards FLOAT,
+    Loan_By_Alex FLOAT,
+    Grand_Total FLOAT
+);
+
+3. Import CSV into MySQL
+
+    Copy the CSV File to the Server Move your CSV file to a directory where the MySQL user can access it, such as /var/lib/mysql-files/. Run the following command:
+
+sudo cp /home/username/data.csv /var/lib/mysql-files/
+
+Ensure the file has the correct permissions:
+
+sudo chmod 644 /var/lib/mysql-files/data.csv
+
+Use MySQL's LOAD DATA INFILE Command Import the CSV data into your MySQL table:
+
+    LOAD DATA INFILE '/var/lib/mysql-files/data.csv'
+    INTO TABLE Alba
+    FIELDS TERMINATED BY ',' 
+    ENCLOSED BY '"'
+    LINES TERMINATED BY '\n'
+    IGNORE 1 ROWS
+    (Month, Capital_One, Sally_Fashion, Truist, Synchrony_Gato, Macys, Navy_Federal, Personal_Cards, Loan_By_Alex, Grand_Total);
+
+        IGNORE 1 ROWS skips the header row in the CSV file.
+        Replace Alba with the name of the table you're importing into.
+
+4. Verify the Data
+
+After the import, verify that the data was added correctly:
+
+SELECT * FROM Alba;
+
+Troubleshooting Tips
+
+    CSV File Permissions: If you encounter file access errors, ensure the MySQL user has permission to read the file.
+
+    MySQL secure_file_priv Restriction: If LOAD DATA INFILE is restricted by MySQL’s secure_file_priv, you might need to modify the configuration:
+        Open the MySQL configuration file:
+
+sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+
+Add or update:
+
+secure_file_priv = "/var/lib/mysql-files/"
+
+Restart MySQL:
+
+    sudo systemctl restart mysql
+
+Excel Formatting:
+
+    Ensure there are no extra blank rows or columns in the CSV.
+    Ensure numeric columns contain only numbers.
