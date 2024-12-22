@@ -1,0 +1,118 @@
+Based on the screenshots, it appears there may be issues with either the PHP backend (`fetch_budget.php`) or the database connection. Let's troubleshoot and resolve this step by step:
+
+---
+
+### 1. **Check PHP Errors**
+When you visit `http://192.168.1.254/fetch_budget.php`, the blank page indicates that PHP is not returning anything. Follow these steps to debug:
+
+#### Enable PHP Error Reporting:
+1. Open the PHP configuration file:
+   ```bash
+   sudo nano /etc/php/7.x/apache2/php.ini
+   ```
+   (Replace `7.x` with your PHP version, e.g., `7.4` or `8.0`.)
+
+2. Look for the following settings and update them:
+   ```ini
+   display_errors = On
+   display_startup_errors = On
+   error_reporting = E_ALL
+   ```
+3. Save and exit (`CTRL + O`, then `CTRL + X`).
+
+4. Restart Apache to apply changes:
+   ```bash
+   sudo systemctl restart apache2
+   ```
+
+5. Reload `http://192.168.1.254/fetch_budget.php` in your browser. You should now see error messages that can help identify the issue.
+
+---
+
+### 2. **Test the Database Connection**
+The issue might be related to the database credentials or structure.
+
+#### Create a Database Test Script:
+1. Create a new PHP file (e.g., `db_test.php`):
+   ```bash
+   sudo nano /var/www/html/db_test.php
+   ```
+
+2. Paste the following code:
+   ```php
+   <?php
+   $servername = "localhost";
+   $username = "admin";
+   $password = "P@ssw0rd";
+   $dbname = "family_budget";
+
+   // Connect to the database
+   $conn = new mysqli($servername, $username, $password, $dbname);
+
+   // Check connection
+   if ($conn->connect_error) {
+       die("Connection failed: " . $conn->connect_error);
+   }
+   echo "Database connection successful!";
+
+   // Test query
+   $result = $conn->query("SHOW TABLES");
+   if ($result->num_rows > 0) {
+       echo "<br>Tables in database:";
+       while ($row = $result->fetch_assoc()) {
+           echo "<br>" . $row["Tables_in_$dbname"];
+       }
+   } else {
+       echo "<br>No tables found in the database.";
+   }
+
+   $conn->close();
+   ?>
+   ```
+
+3. Save the file and open it in your browser:
+   ```
+   http://192.168.1.254/db_test.php
+   ```
+
+4. **Expected Results**:
+   - If the connection is successful, you’ll see a list of tables.
+   - If not, the script will show an error message that can help pinpoint the problem.
+
+---
+
+### 3. **Check fetch_budget.php**
+If the database connection works, the issue might be in `fetch_budget.php`. Revisit this script to ensure:
+- **Correct SQL Queries**: Double-check the `SELECT` statements.
+- **Proper Output**: Ensure `echo json_encode($data);` is called.
+
+---
+
+### 4. **Check Browser Console**
+In your frontend (e.g., `http://192.168.1.254/index.html`), open the browser console (`F12` or `CTRL + SHIFT + J` on most browsers):
+- Check for errors in the **Console** or **Network** tabs.
+- Look for failed requests to `fetch_budget.php` and examine the status code (e.g., `404`, `500`).
+
+---
+
+### 5. **Common Issues**
+Here are a few things to double-check:
+1. **Permissions**: Ensure `fetch_budget.php` and other files in `/var/www/html` are readable by the web server:
+   ```bash
+   sudo chmod 644 /var/www/html/fetch_budget.php
+   ```
+2. **Database Structure**: Ensure the `family_budget` database exists and contains the expected tables with data.
+3. **PHP Modules**: Ensure required PHP modules (e.g., `mysqli`) are installed:
+   ```bash
+   sudo apt install php-mysqli
+   sudo systemctl restart apache2
+   ```
+
+---
+
+### Let Me Know:
+1. The error messages after enabling PHP error reporting.
+2. The output of the `db_test.php` script.
+3. Any errors from the browser console or network tab.
+
+This will help identify and resolve the issue!
