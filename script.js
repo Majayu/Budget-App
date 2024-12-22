@@ -1,36 +1,21 @@
-document.getElementById('budgetForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    alert('Budget data submitted!');
-});
+async function fetchBudgetData() {
+    try {
+        const response = await fetch('http://localhost/fetch_budget.php');
+        const data = await response.json();
 
-document.getElementById('goalForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    alert('Goal set!');
-});
+        const tableBody = document.getElementById('budgetTableBody');
+        tableBody.innerHTML = ''; // Clear any existing rows
 
-// Placeholder for charts
-const pieCtx = document.getElementById('pieChart').getContext('2d');
-const barCtx = document.getElementById('barChart').getContext('2d');
+        data.forEach(item => {
+            const row = document.createElement('tr');
 
-const pieChart = new Chart(pieCtx, {
-    type: 'pie',
-    data: {
-        labels: ['Rent', 'Groceries', 'Entertainment', 'Savings'],
-        datasets: [{
-            data: [500, 300, 200, 400],
-            backgroundColor: ['red', 'blue', 'green', 'yellow']
-        }]
-    }
-});
+            if (item.person === "Giovanni") {
+                row.innerHTML = `
+                    <td>${item.person}</td>
+                    <td>Month: ${item.month}, Volaris: ${item.volaris || 'N/A'}, Monthly: ${item.monthly_total}</td>
+                `;
+            }
 
-const barChart = new Chart(barCtx, {
-    type: 'bar',
-    data: {
-        labels: ['January', 'February', 'March', 'April'],
-        datasets: [{
-            label: 'Expenses',
-            data: [1200, 1100, 900, 1000],
-            backgroundColor: 'blue'
-        }]
-    }
-});
+            tableBody.appendChild(row);
+        });
+    } catch (
