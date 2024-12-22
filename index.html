@@ -34,6 +34,7 @@
     <div class="container">
         <h1 class="my-4">Family Budget Tracker</h1>
 
+        <!-- Home Loan Table -->
         <h2>Home Loan Data</h2>
         <table>
             <thead>
@@ -44,7 +45,57 @@
                 </tr>
             </thead>
             <tbody id="homeLoanTableBody">
-                <!-- Data will be inserted here dynamically -->
+                <!-- Home Loan Data will be inserted here -->
+            </tbody>
+        </table>
+
+        <!-- Add sections for other tables -->
+        <h2>Alba Data</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Month</th>
+                    <th>Capital One</th>
+                    <th>Sally Fashion</th>
+                    <th>Truist</th>
+                    <th>Grand Total</th>
+                </tr>
+            </thead>
+            <tbody id="albaTableBody">
+                <!-- Alba Data will be inserted here -->
+            </tbody>
+        </table>
+
+        <h2>Giovanni Data</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Month</th>
+                    <th>Volaris</th>
+                    <th>Navy Federal</th>
+                    <th>Monthly Total</th>
+                </tr>
+            </thead>
+            <tbody id="giovanniTableBody">
+                <!-- Giovanni Data will be inserted here -->
+            </tbody>
+        </table>
+
+        <h2>Alex Data</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Month</th>
+                    <th>Navy Federal</th>
+                    <th>Capital One APR</th>
+                    <th>Estimated Payment</th>
+                </tr>
+            </thead>
+            <tbody id="alexTableBody">
+                <!-- Alex Data will be inserted here -->
             </tbody>
         </table>
     </div>
@@ -55,11 +106,9 @@
                 const response = await fetch('http://192.168.1.254/fetch_budget.php');
                 const data = await response.json();
 
-                const homeLoanTableBody = document.getElementById('homeLoanTableBody');
-                homeLoanTableBody.innerHTML = ''; // Clear any existing rows
-
                 // Populate Home Loan Table
-                data["Home_Loan"].forEach(item => {
+                const homeLoanTableBody = document.getElementById('homeLoanTableBody');
+                data.Home_Loan.forEach(item => {
                     const row = document.createElement('tr');
                     row.innerHTML = `
                         <td>${item.id}</td>
@@ -68,8 +117,52 @@
                     `;
                     homeLoanTableBody.appendChild(row);
                 });
+
+                // Populate Alba Table
+                const albaTableBody = document.getElementById('albaTableBody');
+                data.Alba.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${item.id}</td>
+                        <td>${item.Month}</td>
+                        <td>${item.Capital_One || 'N/A'}</td>
+                        <td>${item.Sally_Fashion || 'N/A'}</td>
+                        <td>${item.Truist || 'N/A'}</td>
+                        <td>${item.Grand_Total}</td>
+                    `;
+                    albaTableBody.appendChild(row);
+                });
+
+                // Populate Giovanni Table
+                const giovanniTableBody = document.getElementById('giovanniTableBody');
+                data.Giovanni.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${item.id}</td>
+                        <td>${item.Month}</td>
+                        <td>${item.Volaris || 'N/A'}</td>
+                        <td>${item.Navy_Federal || 'N/A'}</td>
+                        <td>${item.Monthly_Total}</td>
+                    `;
+                    giovanniTableBody.appendChild(row);
+                });
+
+                // Populate Alex Table
+                const alexTableBody = document.getElementById('alexTableBody');
+                data.Alex.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${item.id}</td>
+                        <td>${item.Month}</td>
+                        <td>${item.Navy_Federal || 'N/A'}</td>
+                        <td>${item.Capital_One_APR || 'N/A'}</td>
+                        <td>${item.Estimated_Payment}</td>
+                    `;
+                    alexTableBody.appendChild(row);
+                });
+
             } catch (error) {
-                console.error('Error fetching Home Loan data:', error);
+                console.error('Error fetching data:', error);
             }
         });
     </script>
