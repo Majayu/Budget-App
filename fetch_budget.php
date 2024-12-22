@@ -63,3 +63,6 @@ $conn->close();
 header('Content-Type: application/json');
 echo json_encode($data);
 ?>
+
+//Give permissions
+sudo chmod 644 fetch_budget.php
