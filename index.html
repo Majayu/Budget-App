@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Budget Data</title>
+    <title>Family Budget Tracker</title>
+
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -27,21 +31,47 @@
     </style>
 </head>
 <body>
-    <h1>Family Budget Data</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Person</th>
-                <th>Category</th>
-                <th>Amount</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-        <tbody id="budgetTableBody">
-            <!-- Data will be inserted here -->
-        </tbody>
-    </table>
+    <div class="container">
+        <h1 class="my-4">Family Budget Tracker</h1>
 
-    <script src="script.js"></script>
+        <h2>Home Loan Data</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Loan Amount</th>
+                    <th>Monthly Payment</th>
+                </tr>
+            </thead>
+            <tbody id="homeLoanTableBody">
+                <!-- Data will be inserted here dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('http://192.168.1.254/fetch_budget.php');
+                const data = await response.json();
+
+                const homeLoanTableBody = document.getElementById('homeLoanTableBody');
+                homeLoanTableBody.innerHTML = ''; // Clear any existing rows
+
+                // Populate Home Loan Table
+                data["Home_Loan"].forEach(item => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${item.id}</td>
+                        <td>${item.Loan_Amount}</td>
+                        <td>${item.Monthly_Payment}</td>
+                    `;
+                    homeLoanTableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error fetching Home Loan data:', error);
+            }
+        });
+    </script>
 </body>
 </html>
