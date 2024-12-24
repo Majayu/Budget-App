@@ -37,3 +37,7 @@ CREATE TABLE Home_Loan (
     monthly_payment FLOAT
 );
 
+// Example to insert columns
+INSERT INTO Alex (Month, Navy_Federal, Capital_One_APR, Estimated_Payment)
+VALUES ('2024-01', 300.00, 100.00, 400.00);
+
