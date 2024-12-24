@@ -49,7 +49,7 @@
             </tbody>
         </table>
 
-        <!-- Add sections for other tables -->
+        <!-- Alba Table -->
         <h2>Alba Data</h2>
         <table>
             <thead>
@@ -59,14 +59,20 @@
                     <th>Capital One</th>
                     <th>Sally Fashion</th>
                     <th>Truist</th>
+                    <th>Synchrony Gato</th>
+                    <th>Macys</th>
+                    <th>Navy Federal</th>
+                    <th>Personal Cards</th>
+                    <th>Loan By Alex</th>
                     <th>Grand Total</th>
                 </tr>
             </thead>
             <tbody id="albaTableBody">
-                <!-- Alba Data will be inserted here -->
+                <!-- Data will be dynamically inserted here -->
             </tbody>
         </table>
 
+        <!-- Giovanni Table -->
         <h2>Giovanni Data</h2>
         <table>
             <thead>
@@ -83,6 +89,7 @@
             </tbody>
         </table>
 
+        <!-- Alex Table -->
         <h2>Alex Data</h2>
         <table>
             <thead>
@@ -111,9 +118,9 @@
                 data.Home_Loan.forEach(item => {
                     const row = document.createElement('tr');
                     row.innerHTML = `
-                        <td>${item.id}</td>
-                        <td>${item.Loan_Amount}</td>
-                        <td>${item.Monthly_Payment}</td>
+                        <td>${item.id !== null && item.id !== "" ? item.id : 'N/A'}</td>
+                        <td>${item.Loan_Amount !== null && item.Loan_Amount !== "" ? item.Loan_Amount : 'N/A'}</td>
+                        <td>${item.Monthly_Payment !== null && item.Monthly_Payment !== "" ? item.Monthly_Payment : 'N/A'}</td>
                     `;
                     homeLoanTableBody.appendChild(row);
                 });
@@ -123,12 +130,17 @@
                 data.Alba.forEach(item => {
                     const row = document.createElement('tr');
                     row.innerHTML = `
-                        <td>${item.id}</td>
-                        <td>${item.Month}</td>
-                        <td>${item.Capital_One || 'N/A'}</td>
-                        <td>${item.Sally_Fashion || 'N/A'}</td>
-                        <td>${item.Truist || 'N/A'}</td>
-                        <td>${item.Grand_Total}</td>
+                        <td>${item.id !== null && item.id !== "" ? item.id : 'N/A'}</td>
+                        <td>${item.Month !== null && item.Month !== "" ? item.Month : 'N/A'}</td>
+                        <td>${item.Capital_One !== null && item.Capital_One !== "" ? item.Capital_One : 'N/A'}</td>
+                        <td>${item.Sally_Fashion !== null && item.Sally_Fashion !== "" ? item.Sally_Fashion : 'N/A'}</td>
+                        <td>${item.Truist !== null && item.Truist !== "" ? item.Truist : 'N/A'}</td>
+                        <td>${item.Synchrony_Gato !== null && item.Synchrony_Gato !== "" ? item.Synchrony_Gato : 'N/A'}</td>
+                        <td>${item.Macys !== null && item.Macys !== "" ? item.Macys : 'N/A'}</td>
+                        <td>${item.Navy_Federal !== null && item.Navy_Federal !== "" ? item.Navy_Federal : 'N/A'}</td>
+                        <td>${item.Personal_Cards !== null && item.Personal_Cards !== "" ? item.Personal_Cards : 'N/A'}</td>
+                        <td>${item.Loan_By_Alex !== null && item.Loan_By_Alex !== "" ? item.Loan_By_Alex : 'N/A'}</td>
+                        <td>${item.Grand_Total !== null && item.Grand_Total !== "" ? item.Grand_Total : 'N/A'}</td>
                     `;
                     albaTableBody.appendChild(row);
                 });
@@ -138,11 +150,11 @@
                 data.Giovanni.forEach(item => {
                     const row = document.createElement('tr');
                     row.innerHTML = `
-                        <td>${item.id}</td>
-                        <td>${item.Month}</td>
-                        <td>${item.Volaris || 'N/A'}</td>
-                        <td>${item.Navy_Federal || 'N/A'}</td>
-                        <td>${item.Monthly_Total}</td>
+                        <td>${item.id !== null && item.id !== "" ? item.id : 'N/A'}</td>
+                        <td>${item.Month !== null && item.Month !== "" ? item.Month : 'N/A'}</td>
+                        <td>${item.Volaris !== null && item.Volaris !== "" ? item.Volaris : 'N/A'}</td>
+                        <td>${item.Navy_Federal !== null && item.Navy_Federal !== "" ? item.Navy_Federal : 'N/A'}</td>
+                        <td>${item.Monthly_Total !== null && item.Monthly_Total !== "" ? item.Monthly_Total : 'N/A'}</td>
                     `;
                     giovanniTableBody.appendChild(row);
                 });
@@ -152,11 +164,11 @@
                 data.Alex.forEach(item => {
                     const row = document.createElement('tr');
                     row.innerHTML = `
-                        <td>${item.id}</td>
-                        <td>${item.Month}</td>
-                        <td>${item.Navy_Federal || 'N/A'}</td>
-                        <td>${item.Capital_One_APR || 'N/A'}</td>
-                        <td>${item.Estimated_Payment}</td>
+                        <td>${item.id !== null && item.id !== "" ? item.id : 'N/A'}</td>
+                        <td>${item.Month !== null && item.Month !== "" ? item.Month : 'N/A'}</td>
+                        <td>${item.Navy_Federal !== null && item.Navy_Federal !== "" ? item.Navy_Federal : 'N/A'}</td>
+                        <td>${item.Capital_One_APR !== null && item.Capital_One_APR !== "" ? item.Capital_One_APR : 'N/A'}</td>
+                        <td>${item.Estimated_Payment !== null && item.Estimated_Payment !== "" ? item.Estimated_Payment : 'N/A'}</td>
                     `;
                     alexTableBody.appendChild(row);
                 });
