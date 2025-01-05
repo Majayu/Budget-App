@@ -1,7 +1,17 @@
 Allowing SSH: https://www.youtube.com/watch?v=lI82H5_UjA8&list=PLo-G8RzU-CH1jizVMoK12od0I_Jl6ib0f&index=2
 
+
+##follow this video at first 
+    https://www.youtube.com/watch?v=U2xHSRuwJ-A&list=LL&index=1&t=300s
+// TO FIX THE SSL CERTIFICATE THE COMMAND IS:
+    sudo adduser "user" ssl-cert
+// To Fix the polkit dir not exsisting create it by hand then after creating the last folder create the nano file
+    nano.../50-local.d/40-allow.colord.pkla
+
+
 #Video: https://www.youtube.com/watch?v=CUAbB-gvIFE
 sudo apt install xrdp
 #Allow rdp to run every time is boot up
 sudo systemctl enable --now xrdp 
 sudo ufw allow from any to any port 3389 porto tcp
+
