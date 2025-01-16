@@ -34,6 +34,20 @@
     <div class="container">
         <h1 class="my-4">Family Budget Tracker</h1>
 
+        <!-- Add Home Loan Form -->
+        <h2>Add Home Loan Data</h2>
+        <form id="homeLoanForm">
+            <div class="mb-3">
+                <label for="loanAmount" class="form-label">Loan Amount</label>
+                <input type="number" class="form-control" id="loanAmount" placeholder="Enter loan amount" required>
+            </div>
+            <div class="mb-3">
+                <label for="monthlyPayment" class="form-label">Monthly Payment</label>
+                <input type="number" class="form-control" id="monthlyPayment" placeholder="Enter monthly payment" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Home Loan</button>
+        </form>
+
         <!-- Home Loan Table -->
         <h2>Home Loan Data</h2>
         <table>
@@ -49,7 +63,7 @@
             </tbody>
         </table>
 
-        <!-- Add sections for other tables -->
+        <!-- Alba, Giovanni, Alex Tables -->
         <h2>Alba Data</h2>
         <table>
             <thead>
@@ -59,112 +73,23 @@
                     <th>Capital One</th>
                     <th>Sally Fashion</th>
                     <th>Truist</th>
+                    <th>Synchrony Gato</th>
+                    <th>Macys</th>
+                    <th>Navy Federal</th>
+                    <th>Personal Cards</th>
+                    <th>Loan By Alex</th>
                     <th>Grand Total</th>
                 </tr>
             </thead>
             <tbody id="albaTableBody">
-                <!-- Alba Data will be inserted here -->
+                <!-- Alba Data will be dynamically inserted here -->
             </tbody>
         </table>
 
-        <h2>Giovanni Data</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Month</th>
-                    <th>Volaris</th>
-                    <th>Navy Federal</th>
-                    <th>Monthly Total</th>
-                </tr>
-            </thead>
-            <tbody id="giovanniTableBody">
-                <!-- Giovanni Data will be inserted here -->
-            </tbody>
-        </table>
-
-        <h2>Alex Data</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Month</th>
-                    <th>Navy Federal</th>
-                    <th>Capital One APR</th>
-                    <th>Estimated Payment</th>
-                </tr>
-            </thead>
-            <tbody id="alexTableBody">
-                <!-- Alex Data will be inserted here -->
-            </tbody>
-        </table>
+        <!-- Add other table structures here -->
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            try {
-                const response = await fetch('http://192.168.1.254/fetch_budget.php');
-                const data = await response.json();
-
-                // Populate Home Loan Table
-                const homeLoanTableBody = document.getElementById('homeLoanTableBody');
-                data.Home_Loan.forEach(item => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${item.id}</td>
-                        <td>${item.Loan_Amount}</td>
-                        <td>${item.Monthly_Payment}</td>
-                    `;
-                    homeLoanTableBody.appendChild(row);
-                });
-
-                // Populate Alba Table
-                const albaTableBody = document.getElementById('albaTableBody');
-                data.Alba.forEach(item => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${item.id}</td>
-                        <td>${item.Month}</td>
-                        <td>${item.Capital_One || 'N/A'}</td>
-                        <td>${item.Sally_Fashion || 'N/A'}</td>
-                        <td>${item.Truist || 'N/A'}</td>
-                        <td>${item.Grand_Total}</td>
-                    `;
-                    albaTableBody.appendChild(row);
-                });
-
-                // Populate Giovanni Table
-                const giovanniTableBody = document.getElementById('giovanniTableBody');
-                data.Giovanni.forEach(item => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${item.id}</td>
-                        <td>${item.Month}</td>
-                        <td>${item.Volaris || 'N/A'}</td>
-                        <td>${item.Navy_Federal || 'N/A'}</td>
-                        <td>${item.Monthly_Total}</td>
-                    `;
-                    giovanniTableBody.appendChild(row);
-                });
-
-                // Populate Alex Table
-                const alexTableBody = document.getElementById('alexTableBody');
-                data.Alex.forEach(item => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${item.id}</td>
-                        <td>${item.Month}</td>
-                        <td>${item.Navy_Federal || 'N/A'}</td>
-                        <td>${item.Capital_One_APR || 'N/A'}</td>
-                        <td>${item.Estimated_Payment}</td>
-                    `;
-                    alexTableBody.appendChild(row);
-                });
-
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        });
-    </script>
+    <!-- Link to the external JavaScript file -->
+    <script src="scripts.js"></script>
 </body>
 </html>
