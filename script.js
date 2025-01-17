@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <td>${item.Loan_Amount !== null && item.Loan_Amount !== "" ? item.Loan_Amount : 'N/A'}</td>
                 <td>${item.Monthly_Payment !== null && item.Monthly_Payment !== "" ? item.Monthly_Payment : 'N/A'}</td>
             `;
-            homeLoanTableBody.appendChild(row);
+            homeLoanTableBody.appendChild(row); // Adds the new row to the table.
         });
     } catch (error) {
         console.error('Error fetching data:', error);
