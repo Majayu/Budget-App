@@ -16,7 +16,7 @@ if ($conn->connect_error) {
     exit();
 }
 
-// Get input data from the frontend
+// Get input data
 $data = json_decode(file_get_contents('php://input'), true);
 $loanAmount = $data['loanAmount'];
 $monthlyPayment = $data['monthlyPayment'];
