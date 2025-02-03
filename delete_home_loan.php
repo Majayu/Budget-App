@@ -1,41 +1,38 @@
 <?php
 header('Content-Type: application/json');
 
-// Database connection details
+// Database connection
 $servername = "localhost";
 $username = "admin";
 $password = "P@ssw0rd";
 $dbname = "family_budget";
 
-// Connect to the database
 $conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
 if ($conn->connect_error) {
-    echo json_encode(['success' => false, 'message' => 'Connection failed: ' . $conn->connect_error]);
+    echo json_encode(['success' => false, 'message' => 'Database connection failed: ' . $conn->connect_error]);
     exit();
 }
 
-// Get input data (id)
+// Get input data
 $data = json_decode(file_get_contents('php://input'), true);
-$id = $data['id'];
+$id = $data['id'] ?? null;
 
-if (!$id) {
-    echo json_encode(['success' => false, 'message' => 'Invalid ID provided']);
-    exit();
-}
+if ($id) {
+    // Securely delete the row with the given ID
+    $query = "DELETE FROM Home_Loan WHERE id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $id);
 
-// Delete the record from the Home_Loan table
-$query = "DELETE FROM Home_Loan WHERE id = ?";
-$stmt = $conn->prepare($query);
-$stmt->bind_param("i", $id);
+    if ($stmt->execute()) {
+        echo json_encode(['success' => true, 'message' => 'Entry deleted']);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Failed to delete entry: ' . $stmt->error]);
+    }
 
-if ($stmt->execute()) {
-    echo json_encode(['success' => true, 'message' => 'Entry deleted successfully']);
+    $stmt->close();
 } else {
-    echo json_encode(['success' => false, 'message' => 'Failed to delete entry: ' . $stmt->error]);
+    echo json_encode(['success' => false, 'message' => 'Invalid ID']);
 }
 
-$stmt->close();
 $conn->close();
 ?>
