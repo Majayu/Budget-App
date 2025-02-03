@@ -92,6 +92,7 @@ If the database connection works, the issue might be in `fetch_budget.php`. Revi
 In your frontend (e.g., `http://192.168.1.254/index.html`), open the browser console (`F12` or `CTRL + SHIFT + J` on most browsers):
 - Check for errors in the **Console** or **Network** tabs.
 - Look for failed requests to `fetch_budget.php` and examine the status code (e.g., `404`, `500`).
+Clear your browser cache (Ctrl + Shift + R or Cmd + Shift + R on Mac).
 
 ---
 
