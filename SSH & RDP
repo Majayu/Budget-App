@@ -10,3 +10,32 @@ Troubleshooting
 #looks like I have no key
 alex@localhost:~$ /usr/sbin/sshd -T
 sshd: no hostkeys available -- exiting.
+
+You might still have another desktop manager in your .xsession config.
+
+cd /home/youruser
+echo "gnome-session --session=ubuntu-2d" > .xsession
+sudo /etc/init.d/xrdp restart
+
+
+
+#Other option 
+For anyone who is interested, I managed to solve the problem by navigating to /etc/xrdp/ and editing file startwm.sh
+
+I added
+
+unset DBUS_SESSION_BUS_ADDRESS
+unset XDG_RUNTIME_DIR
+
+here
+
+if test -r /etc/profile; then
+    . /etc/profile
+fi
+unset DBUS_SESSION_BUS_ADDRESS
+unset XDG_RUNTIME_DIR
+
+if test -r /etc/default/locale; then
+    . /etc/default/locale
+    test -z "${LANG+x}" || export LANG
+
