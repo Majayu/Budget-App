@@ -4,4 +4,4 @@ Allowing SSH: https://www.youtube.com/watch?v=lI82H5_UjA8&list=PLo-G8RzU-CH1jizV
 sudo apt install xrdp
 #Allow rdp to run every time is boot up
 sudo systemctl enable --now xrdp 
-sudo ufw allow from any to any port 3389 porto tcp
+sudo ufw allow from any to any port 3389 proto tcp
