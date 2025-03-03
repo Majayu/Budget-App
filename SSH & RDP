@@ -19,16 +19,15 @@ sudo /etc/init.d/xrdp restart
 
 
 
-#Other option 
+#This worked to give me an image
 For anyone who is interested, I managed to solve the problem by navigating to /etc/xrdp/ and editing file startwm.sh
 
 I added
-
 unset DBUS_SESSION_BUS_ADDRESS
 unset XDG_RUNTIME_DIR
 
 here
-
+===========================================
 if test -r /etc/profile; then
     . /etc/profile
 fi
