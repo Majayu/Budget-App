@@ -37,4 +37,8 @@ unset XDG_RUNTIME_DIR
 if test -r /etc/default/locale; then
     . /etc/default/locale
     test -z "${LANG+x}" || export LANG
+===========================================
+#comands
+systemctl status ssh   
 
+/usr/lib/systemd/system/ssh.service; 
