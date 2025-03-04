@@ -19,7 +19,7 @@ sudo /etc/init.d/xrdp restart
 
 
 
-#This worked to give me an image
+#This worked to give me an image but still no luck..
 For anyone who is interested, I managed to solve the problem by navigating to /etc/xrdp/ and editing file startwm.sh
 
 I added
