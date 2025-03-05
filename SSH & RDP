@@ -42,3 +42,8 @@ if test -r /etc/default/locale; then
 systemctl status ssh   
 
 /usr/lib/systemd/system/ssh.service; 
+
+systemctl --user restart gnome-remote-desktop
+
+============
+https://askubuntu.com/questions/1478769/cannot-connect-to-ubuntu-22-04-through-rdp
