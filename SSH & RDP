@@ -45,5 +45,8 @@ systemctl status ssh
 
 systemctl --user restart gnome-remote-desktop
 
+# One of these two sites made the xrdp cpme enable? 
 ============
+https://askubuntu.com/questions/1478769/cannot-connect-to-ubuntu-22-04-through-rdp
+=====
 https://askubuntu.com/questions/1478769/cannot-connect-to-ubuntu-22-04-through-rdp
